@@ -67,10 +67,27 @@ function displayCommands(technique, selectedTransferTo) {
         // Add the container to the output
         commandOutput.appendChild(commandContainer);
     });
+
+    // Add "Copy to Clipboard" button after commands are displayed
+    const copyButton = document.createElement('button');
+    copyButton.textContent = 'Copy Commands';
+    copyButton.addEventListener('click', () => {
+        const commandText = Array.from(commandOutput.querySelectorAll('span'))
+            .map(span => span.textContent)
+            .join('\n');
+
+        navigator.clipboard.writeText(commandText)
+            .then(() => alert('Commands copied to clipboard!'))
+            .catch(err => console.error('Failed to copy:', err));
+    });
+
+    // Clear previous button instances to prevent duplicates
+    const existingButton = document.getElementById('copyButton');
+    if (existingButton) existingButton.remove();
+
+    copyButton.id = 'copyButton';
+    commandOutput.appendChild(copyButton);
 }
-
-
-
 
 // Initialiseer het menu bij het laden van de pagina
 document.addEventListener('DOMContentLoaded', populateMenu);

