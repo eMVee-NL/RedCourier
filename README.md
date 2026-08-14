@@ -1,5 +1,6 @@
 # REDCOURIER
 A lightweight and interactive file transfer command generator designed to streamline asset ingestion and data exfiltration workflows during network security assessments.
+![REDCOURIER Interface](screenshot/redcourier.png)
 
 ## Why to use
 During a penetration test, a Red Team engagement, exams (e.g. OSCP, OSEP, PNPT, etc), or even during your CTF, transferring files between an attacker platform (like Kali Linux) and a target machine is a recurring requirement. Security professionals often face different operating systems, restricted firewalls, or environments without administrative access. 
