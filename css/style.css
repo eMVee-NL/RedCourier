@@ -253,3 +253,50 @@ pre {
         grid-column: span 1;
     }
 }
+
+
+/* --- GITHUB CONTRIBUTOR CORNER BUTTON --- */
+.github-link {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #1e1e2e;
+    color: #cdd6f4;
+    text-decoration: none;
+    padding: 8px 14px;
+    border: 1px solid #313244;
+    border-radius: 6px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
+    transition: all 0.2s ease-in-out;
+    z-index: 1000;
+}
+
+.github-link:hover {
+    background-color: #313244;
+    color: #f38ba8; /* Light red accent matches the REDCOURIER theme */
+    border-color: #f38ba8;
+    box-shadow: 0 0 10px rgba(243, 139, 168, 0.2);
+}
+
+.github-link svg {
+    transition: transform 0.2s ease-in-out;
+}
+
+.github-link:hover svg {
+    transform: scale(1.1);
+}
+
+/* Ensure the button scales or handles small mobile devices gracefully */
+@media (max-width: 768px) {
+    .github-link {
+        position: relative;
+        top: 0;
+        right: 0;
+        margin: 10px auto 20px auto;
+        width: fit-content;
+    }
+}
