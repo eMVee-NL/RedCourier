@@ -27,8 +27,8 @@ If you notice a command string failing during an engagement, or if you want to h
 
 ## Credits and inspiration
 The concept and design of this application are heavily inspired by the following excellent resources within the cybersecurity community:
-- The interactive layout and structure philosophy of revshells.com. No the UI is not the same, but I did like the idea of generating commands.
-- The comprehensive file transfer mindmap (Obsidian canvas/mindmaps) created by myself (eMVee), which is publicly available on my GitHub.
+- The interactive layout and structure philosophy of [revshells.com](https://www.revshells.com/). No the UI is not the same, but I did like the idea of generating commands.
+- The comprehensive file transfer mindmap (Obsidian canvas/mindmaps) created by myself (eMVee), which is publicly available on my [GitHub](https://github.com/eMVee-NL/MindMap#mindmap-transfer-files-from-victim-to-attacker).
 
 ## Disclaimer
 This software is developed strictly for educational purposes, defensive security research, and authorized penetration testing assignments. It should only be used in networks where you have explicit, written permission from the asset owner.
