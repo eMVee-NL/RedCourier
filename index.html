@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REDCOURIER</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- LOGO EN SLOGAN -->
+        <div class="logo-wrapper">
+            <div class="logo-container">
+                <svg xmlns="http://w3.org" width="1600" height="180" viewBox="0 0 1600 180">
+                  <rect width="100%" height="100%" fill="#11111b" rx="6"/>
+                  <text font-family="Courier New, Courier, monospace" font-size="20" xml:space="preserve">
+                    <tspan x="330" y="30"><tspan fill="#f38ba8">██████╗ ███████╗██████╗ </tspan><tspan fill="#cdd6f4"> ██████╗ ██████╗ ██╗   ██╗██████╗ ██╗███████╗██████╗</tspan></tspan>
+                    <tspan x="330" dy="24"><tspan fill="#f38ba8">██╔══██╗██╔════╝██╔══██╗</tspan><tspan fill="#cdd6f4">██╔════╝██╔═══██╗██║   ██║██╔══██╗██║██╔════╝██╔══██╗</tspan></tspan>
+                    <tspan x="330" dy="24"><tspan fill="#f38ba8">██████╔╝█████╗  ██║  ██║</tspan><tspan fill="#cdd6f4">██║     ██║   ██║██║   ██║██████╔╝██║█████╗  ██████╔╝</tspan></tspan>
+                    <tspan x="330" dy="24"><tspan fill="#f38ba8">██╔══██╗██╔══╝  ██║  ██║</tspan><tspan fill="#cdd6f4">██║     ██║   ██║██║   ██║██╔══██╗██║██╔══╝  ██╔══██╗</tspan></tspan>
+                    <tspan x="330" dy="24"><tspan fill="#f38ba8">██║  ██║███████╗██████╔╝</tspan><tspan fill="#cdd6f4">╚██████╗╚██████╔╝╚██████╔╝██║  ██║██║███████╗██║  ██║</tspan></tspan>
+                    <tspan x="330" dy="24"><tspan fill="#f38ba8">╚═╝  ╚═╝╚══════╝╚═════╝ </tspan><tspan fill="#cdd6f4"> ╚═════╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚═╝╚══════╝╚═╝  ╚═╝</tspan></tspan>
+                  </text>
+                </svg>
+            </div>
+            <p class="logo-slogan">Delivering files right through the open window</p>
+        </div>
+
+        <!-- STAND VAN DE TRANSPORT RICHTING (TABS) -->
+        <div class="direction-tabs-container">
+            <div class="tab-slider"></div>
+            <button class="direction-tab active" onclick="setDirection('ingest', this)">
+                💻 Attacker ➔ 🎯 Victim (Ingestion)
+            </button>
+            <button class="direction-tab" onclick="setDirection('exfil', this)">
+                🎯 Victim ➔ 💻 Attacker (Exfiltration)
+            </button>
+        </div>
+
+        <!-- VISUELE TRANSPORT INDICATOR -->
+        <div class="flow-container">
+            <div class="flow-node" id="visualSource">
+                <div class="node-title">💻 Linux / Kali</div>
+                <div class="node-sub" id="subSource">IP: 10.10.14.5</div>
+            </div>
+            <div class="flow-arrow-wrapper">
+                <div class="flow-arrow" id="flowArrow">HTTP / HTTPS</div>
+                <div class="flow-direction-text" id="flowDirText">TRANSFER TO</div>
+            </div>
+            <div class="flow-node target" id="visualTarget">
+                <div class="node-title">🎯 Windows Target</div>
+                <div class="node-sub" id="subTarget">IP: 10.10.10.100</div>
+            </div>
+        </div>
+
+        <!-- GENERIEK: HOOFDCONFIGURATIE (BOVENAAN) -->
+        <div class="global-config-bar">
+            <div class="form-group">
+                <label for="fileName">Name of file to be transferred</label>
+                <input type="text" id="fileName" value="nc.exe" oninput="updateCommands()">
+            </div>
+            <div class="form-group">
+                <label for="mainTech">Select protocol / technique</label>
+                <select id="mainTech" onchange="onMainTechChange()"></select>
+            </div>
+        </div>
+
+        <!-- CONFIGURATIE GRID -->
+        <div class="wizard-grid">
+            <!-- 1. ATTACKER PANEEL (LINKS) -->
+            <div class="panel">
+                <div class="panel-title">Attacker</div>
+                <div class="form-group">
+                    <label for="sourceOS">System of attacker</label>
+                    <select id="sourceOS" onchange="populateMainTechDropdown()">
+                        <option value="linux">Linux / Kali</option>
+                        <option value="windows">Windows / Pivot</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="sourceIP">IP address of attacker</label>
+                    <input type="text" id="sourceIP" value="10.10.14.5" oninput="updateCommands()">
+                </div>
+                <!-- Dynamic SSH Username for Attacker side -->
+                <div class="form-group" id="attackerSSHUserGroup" style="display: none;">
+                    <label for="attackerSSHUser">SSH Username (Attacker)</label>
+                    <input type="text" id="attackerSSHUser" value="root" oninput="updateCommands()">
+                </div>
+                <!-- Specifieke methode en poort voor de Attacker zijde -->
+                <div class="form-group" id="dynamicHostGroup">
+                    <label for="hostMethod">Select method / tool (Attacker)</label>
+                    <select id="hostMethod" onchange="onWebEngineChange()">
+                        <!-- Wordt dynamisch gevuld via script -->
+                    </select>
+                </div>
+                <div class="form-group" id="portGroup">
+                    <label for="hostPort">Port number (Attacker)</label>
+                    <input type="number" id="hostPort" value="8000" oninput="updateCommands()">
+                </div>
+            </div>
+
+            <!-- 2. VICTIM PANEEL (RECHTS) -->
+            <div class="panel">
+                <div class="panel-title">Victim</div>
+                <div class="form-group">
+                    <label for="targetOS">System of victim</label>
+                    <select id="targetOS" onchange="onTargetOSChange()">
+                        <option value="windows">Windows Server / Client</option>
+                        <option value="linux">Linux</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="targetIP">IP address of victim</label>
+                    <input type="text" id="targetIP" value="10.10.10.100" oninput="updateCommands()">
+                </div>
+                <!-- Dynamic SSH Username for Victim side -->
+                <div class="form-group" id="victimSSHUserGroup" style="display: none;">
+                    <label for="victimSSHUser">SSH Username (Victim)</label>
+                    <input type="text" id="victimSSHUser" value="Administrator" oninput="updateCommands()">
+                </div>
+                <!-- Specifieke methode en poort voor de Victim zijde -->
+                <div class="form-group">
+                    <label for="subMethod">Select method / tool (Victim)</label>
+                    <select id="subMethod" onchange="onSubMethodChange()"></select>
+                </div>
+                <div class="form-group" id="victimPortGroup">
+                    <label for="victimPort">Port number (Victim)</label>
+                    <input type="number" id="victimPort" value="8000" oninput="updateCommands()">
+                </div>
+            </div>
+        </div>
+
+        <!-- COMMAND GENERATOR OUTPUT -->
+        <div class="output-section">
+            <h2>Command Execution Matrix (step by step)</h2>
+            <div id="commandOutput"></div>
+        </div>
+    </div>
+    <script src="js/database.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

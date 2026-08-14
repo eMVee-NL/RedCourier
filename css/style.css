@@ -1,0 +1,255 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #1a1a24;
+    color: #cdd6f4;
+    margin: 0;
+    padding: 20px;
+}
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    background-color: #222232;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+.logo-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centreert logo en slogan horizontaal */
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.logo-container {
+    width: 100%;
+    max-width: 1100px; /* Zorgt dat het logo niet groter wordt dan de container */
+    display: flex;
+    justify-content: center;
+}
+
+.logo-container svg {
+    width: 100%;
+    height: auto;
+    border: 1px solid #313244;
+    border-radius: 6px;
+    display: block;
+}
+
+.logo-slogan {
+    margin-top: 12px;
+    font-size: 15px;
+    color: #a6adc8; /* Zachte retro-grijze kleur */
+    font-style: italic;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-align: center;
+}
+h1 {
+    text-align: center;
+    color: #89b4fa;
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-size: 28px;
+    letter-spacing: 0.5px;
+}
+.direction-tabs-container {
+    display: flex;
+    position: relative;
+    background-color: #11111b;
+    border-radius: 6px;
+    margin-bottom: 25px;
+    padding: 4px;
+    border: 1px solid #313244;
+}
+
+.direction-tab {
+    flex: 1;
+    background: none;
+    border: none;
+    color: #a6adc8;
+    padding: 12px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 2;
+    transition: color 0.3s ease;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.direction-tab.active {
+    color: #11111b;
+}
+
+/* De schuivende achtergrondbalk */
+.tab-slider {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: calc(50% - 4px);
+    height: calc(100% - 8px);
+    background-color: #89b4fa; /* Blauwe highlight */
+    border-radius: 4px;
+    z-index: 1;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Als de tweede tab actief is, schuift de balk 100% naar rechts */
+.direction-tabs-container.switched .tab-slider {
+    transform: translateX(100%);
+}
+.direction-tabs-container.switched .tab-slider {
+    /* Corrigeer de marge voor de rechterkant */
+    transform: translateX(calc(100% + 4px));
+}
+.wizard-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+@media (max-width: 768px) {
+    .wizard-grid { grid-template-columns: 1fr; }
+}
+.panel {
+    background-color: #181826;
+    padding: 20px;
+    border-radius: 6px;
+    border: 1px solid #313244;
+}
+.panel-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #f5e0dc;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid #313244;
+    padding-bottom: 5px;
+}
+.form-group { margin-bottom: 15px; }
+label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 6px;
+    color: #a6adc8;
+}
+select, input[type="text"], input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #45475a;
+    background-color: #11111b;
+    color: #cdd6f4;
+    box-sizing: border-box;
+    font-size: 15px;
+}
+select:focus, input:focus { outline: none; border-color: #89b4fa; }
+.flow-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #11111b;
+    padding: 20px;
+    border-radius: 6px;
+    margin-bottom: 25px;
+    border: 1px dashed #45475a;
+}
+.flow-node {
+    text-align: center;
+    padding: 10px 20px;
+    background-color: #1e1e2e;
+    border-radius: 4px;
+    min-width: 160px;
+    border: 1px solid #89b4fa;
+}
+.flow-node.target { border-color: #f38ba8; }
+.flow-arrow-wrapper {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 15px;
+}
+.flow-arrow {
+    width: 100%;
+    text-align: center;
+    position: relative;
+    color: #a6e3a1;
+    font-weight: bold;
+    font-size: 14px;
+    padding-bottom: 8px;
+}
+.flow-arrow::before {
+    content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background-color: #a6e3a1;
+}
+.flow-arrow::after {
+    content: "▶"; position: absolute; bottom: -6px; right: -4px; font-size: 12px; color: #a6e3a1;
+}
+.flow-direction-text {
+    font-size: 11px; color: #bac2de; text-transform: uppercase; letter-spacing: 1px; margin-top: 5px;
+}
+.node-title { font-weight: bold; font-size: 14px; color: #cdd6f4; }
+.node-sub { font-size: 12px; color: #bac2de; margin-top: 2px; }
+
+.output-section { background-color: #11111b; padding: 20px; border-radius: 6px; border-left: 5px solid #89b4fa; }
+.output-section h2 { font-size: 16px; color: #f5e0dc; margin-top: 0; margin-bottom: 20px; letter-spacing: 0.5px; }
+.step-header-block { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 8px; }
+.step-container { margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #313244; }
+.step-container:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.badge { display: inline-block; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; text-transform: uppercase; }
+.badge-attacker { background-color: #89b4fa; color: #11111b; }
+.badge-target { background-color: #f38ba8; color: #11111b; }
+.badge-info { background-color: #f9e2af; color: #11111b; }
+
+.step-title { font-size: 14px; font-weight: bold; color: #cdd6f4; }
+.step-desc { font-size: 13px; color: #a6adc8; margin: 0 0 10px 0; }
+.pre-wrapper { position: relative; margin: 10px 0; }
+.copy-btn {
+    position: absolute; top: 10px; right: 10px; background-color: #313244; color: #cdd6f4;
+    border: 1px solid #45475a; padding: 4px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; transition: background 0.2s;
+}
+.copy-btn:hover { background-color: #45475a; color: #89b4fa; }
+.copy-btn.copied { background-color: #a6e3a1; color: #11111b; border-color: #a6e3a1; }
+pre {
+    background-color: #181825; padding: 15px; padding-right: 80px; border-radius: 4px; overflow-x: auto;
+    color: #a6e3a1; font-family: 'Courier New', Courier, monospace; font-size: 13px; border: 1px solid #313244; white-space: pre-wrap; margin: 0;
+}
+.info-msg { background-color: #1e1e2e; padding: 12px; border-radius: 4px; border-left: 3px solid #fab387; color: #fab387; font-size: 13px; }
+/* Extra CSS voor de Exfiltration pijlrichting */
+.flow-arrow.reverse-arrow::before {
+    background-color: #f38ba8 !important; /* Maak de lijn rood */
+}
+
+.flow-arrow.reverse-arrow::after {
+    content: "◀" !important; /* Draai de pijlpunt om */
+    left: -4px !important; /* Zet de pijlpunt aan de linkerkant */
+    right: auto !important;
+    color: #f38ba8 !important;
+}
+.global-config-bar {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Netjes 2 kolommen naast elkaar bovenin */
+    gap: 20px;
+    background-color: #181826;
+    padding: 20px;
+    border-radius: 6px;
+    border: 1px solid #313244;
+    margin-bottom: 25px;
+}
+
+
+/* Zorgt dat het dynamicHostGroup bericht over de hele breedte van de balk mag lopen */
+.global-config-bar .full-width {
+    grid-column: span 2;
+}
+
+@media (max-width: 768px) {
+    .global-config-bar { 
+        grid-template-columns: 1fr;
+    }
+    .global-config-bar .full-width {
+        grid-column: span 1;
+    }
+}
